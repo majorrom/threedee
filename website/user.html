@@ -1,0 +1,266 @@
+<html>
+<head>
+	<title>ThreeDee | User</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<!--<script type="text/javascript" src="forms.js"></script> -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$( "#loginform" ).submit(function( event ) {
+				// Stop form from submitting normally
+				event.preventDefault();
+				// Get some values from elements on the page:
+				var $form = $( this ),
+				user = $form.find( "input[name='user']").val(),
+				pass = $form.find( "input[name='pass']").val(),
+				url = "http://192.168.110.127:4242/users/login"
+				// Send the data using post
+				$.ajax({
+					  type: 'POST',
+					  url: url,
+					  crossDomain: true,
+					  data: {user:user, pass:pass},
+					  cache: false,
+					  success: function(data) {
+
+						if($.trim(data) == "false") {
+						  $("#loginresult").html("Login failed");
+						}
+						else {
+						  console.log(data);
+						  if(data.success == true) {
+							$("#loginresult").html("Login successful");
+							localStorage.setItem("token", data.token);
+							localStorage.setItem("user", data.user);
+						  } else {
+							$("#loginresult").html(data.message);
+						  }
+						}
+
+					  }
+					});
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$( "#register" ).submit(function( event ) {
+				// Stop form from submitting normally
+				event.preventDefault();
+				// Get some values from elements on the page:
+				var $form = $( this ),
+				user = $form.find( "input[name='user']").val(),
+				pass = $form.find( "input[name='pass']").val(),
+				passtwo = $form.find( "input[name='pass2']").val(),
+				url = "http://192.168.110.127:4242/users/createaccount"
+				// Send the data using post
+				if(pass == passtwo) {
+					$.ajax({
+						  type: 'POST',
+						  url: url,
+						  crossDomain: true,
+						  data: {user:user, pass:pass},
+						  cache: false,
+						  success: function(data) {
+
+							if($.trim(data) == "false") {
+							  $("#regresult").html('Registration failed.');
+							}
+							else {
+							  console.log(data);
+							  if(data.success == true) {
+								$("#regresult").html('Registered!');
+							  } else {
+								$("#regresult").html(data.message);
+							  }
+							}
+
+						  }
+						});
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			url = "http://192.168.110.127:4242/users/checktoken"
+			// Send the data using post
+			$.ajax({
+			  type: 'POST',
+			  url: url,
+			  crossDomain: true,
+			  data: {user:localStorage.getItem("user"), token:localStorage.getItem("token")},
+			  cache: false,
+			  success: function(data) {
+				if($.trim(data) == "false") {
+				  //do nothing
+				}
+				else {
+					console.log("data is" + JSON.stringify(data));
+					if(data && data.success) {
+						$( ".main" ).empty();
+						$(".main").append('<b id = "userinfo">' + localStorage.getItem("user") + '</b>');
+						$.ajax({
+							  type: 'POST',
+							  url: "http://192.168.110.127:4242/users/getcredits",
+							  crossDomain: true,
+							  data: {user:localStorage.getItem("user"), token:localStorage.getItem("token")},
+							  cache: false,
+							  success: function(data) {
+								if($.trim(data) == "false") {
+								  //do nothing
+								}
+								else {
+									if(data) {
+										$("#userinfo").append('<br />' + data.credits + " credits");
+									}
+								}
+
+							  }
+							});
+						$.ajax({
+							  type: 'POST',
+							  url: "http://192.168.110.127:4242/users/getinfo",
+							  crossDomain: true,
+							  data: {user:localStorage.getItem("user"), token:localStorage.getItem("token")},
+							  cache: false,
+							  success: function(data) {
+								if($.trim(data) == "false") {
+								  //do nothing
+								}
+								else {
+									if(data) {
+										localStorage.setItem("name", data.name);
+										localStorage.setItem("email", data.email);
+										localStorage.setItem("phone", data.phone);
+										$(".main").append('<div class = "login"><h3>Update user info</h3> <form id = "info">Name:<br><input type="text" name="name" value="' + data.name +'"><br>Email:<br><input type="text" name="email" value="' + data.email + '"><br />Phone number:<br><input type="text" name="phone" value="'+ data.phone+ '"><br /><input type="submit" value="Submit"><p id = "updateresult"></p></form></div>');
+										$( "#info" ).submit(function( event ) {
+											// Stop form from submitting normally
+											event.preventDefault();
+											// Get some values from elements on the page:
+											var $form = $( this ),
+											name = $form.find( "input[name='name']").val(),
+											email = $form.find( "input[name='email']").val(),
+											phone = $form.find( "input[name='phone']").val(),
+											url = "http://192.168.110.127:4242/users/createaccount"
+											// Send the data using post
+											var data = "{";
+											if(name) {
+												data += '"name":"'+name + '"';
+											}
+											if(email) {
+												if(data.length>4) {
+													data += ', "email":"' + email + '"';
+												} else {
+													data += '"email":"'+email+ '"';
+												}
+											}
+											if(phone) {
+												if(data.length>4) {
+													data += ', "phone":"' + phone+ '"';
+												} else {
+													data += '"phone":"'+phone+ '"';
+												}
+											}
+											if(data.length>4) {
+												data += ', "user":"' + localStorage.getItem("user") + '", "token":"' + localStorage.getItem("token") + '"}';
+											} else {
+												data += '"user":"' + localStorage.getItem("user") + '", "token":"' + localStorage.getItem("token") + '"}';
+											}
+											console.log(data);
+											data = JSON.parse(data);
+											$.ajax({
+												  type: 'POST',
+												  url: "http://192.168.110.127:4242/users/updateinfo",
+												  crossDomain: true,
+												  data: data,
+												  cache: false,
+												  success: function(data) {
+
+													if($.trim(data) == "false") {
+													  $("#regresult").html('Update failed.');
+													}
+													else {
+													  console.log(data);
+													  if(data.success == true) {
+														$("#updateresult").html('Updated user info');
+													  } else {
+														$("#updateresult").html(data.message);
+													  }
+													}
+
+												  }
+												});
+										});
+									}
+								}
+
+							  }
+							});
+					}
+				}
+
+			  }
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id = "bar">
+		<div id = "holder">
+			<a href="index.html" class="navlink">
+			<div class = "nav" id = "left">
+				Home
+			</div>
+			</a>
+			<a href="orders.html" class ="navlink">
+			<div class = "nav">
+				Order
+			</div>
+			<a>
+			<a href="user.html" class="navlink">
+			<div class = "nav" id = "right">
+				User
+			</div>
+			</a>
+			<span class="stretch"></span>
+		</div>
+	</div>
+	<div id = "top">
+		<h1>ThreeDee</h1>
+		<h3>An innovative way to order 3d prints</h2>
+	</div>
+	<div class = "main">
+		<div class = "login">
+			<h3>Login</h3>
+			 <form id = "loginform">
+				Username:<br>
+				<input type="text" name="user">
+				<br>
+				Password:<br>
+				<input type="password" name="pass" value=""></input>
+				<br />
+				<input type="submit" id="login" value="Submit">
+				<p id = "loginresult"></p>
+			</form> 
+		</div>
+		<div class = "login">
+			<h3>Register</h3>
+			 <form id = "register">
+				Username:<br>
+				<input type="text" name="user">
+				<br>
+				Password:<br>
+				<input type="password" name="pass" value=""></input>
+				<br />
+				Repeat password:<br>
+				<input type="password" name="pass2"></input>
+				<br />
+				<input type="submit" value="Submit">
+				<p id = "regresult"></p>
+			</form> 
+		</div>
+	</div>
+</body>

@@ -1,0 +1,56 @@
+{
+	"items" : [{
+			"name" : "Cute Octopus says Hello",
+			"description" : "A little octopus",
+			"basecost" : 30,
+			"pic" : "http://photos-b.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/914745_227573017452857_2055379062_n.jpg",
+			"colours" : [{
+					"colour" : "Blue",
+					"mod" : 0
+				}, {
+					"colour" : "Red",
+					"mod" : 0
+				}, {
+					"colour" : "Green",
+					"mod" : 0
+				}, {
+					"colour" : "Glow in the dark white",
+					"mod" : 10
+				}, {
+					"colour" : "Glow in the dark blue",
+					"mod" : 20
+				}
+			],
+			"custom" : [{
+					"name" : "Eyes",
+					"description" : "The octopus has little eyes that appear to follow you",
+					"values" : [{
+							"name" : "Yes",
+							"mod" : 0
+						}, {
+							"name" : "No",
+							"mod" : 0
+						}
+					]
+				}, {
+					"name" : "Size",
+					"description" : "Different sizes",
+					"values" : [{
+							"name" : "Small",
+							"mod" : -20
+						}, {
+							"name" : "Medium",
+							"mod" : 0
+						}, {
+							"name" : "Large",
+							"mod" : 20
+						}, {
+							"name" : "Huge",
+							"mod" : 40
+						}
+					]
+				}
+			]
+		}
+	]
+}

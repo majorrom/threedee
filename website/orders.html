@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title>ThreeDee | Home</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="stylesheets/jquery.sidr.dark.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="jquery.sidr.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#simple-menu').sidr();
+		});
+	</script> 
+	<script>
+		$(document).ready(function() {
+			$('#close').sidr();
+		});
+	</script> 
+	<script>
+		/*$(document).ready(function() {
+			var page = window.location.hash.substr(1);
+	//$(".close").attr("href","#" + page);
+	if(page == "elec") {
+		$("#cat").html("Electronics");
+		loadItems();
+	} else if (page == "house") {
+		$("#cat").html("Household");
+		loadItems();
+	} else if (page == "other") {
+		$("#cat").html("Other");
+		loadItems();
+	} else if (!isNaN(page)) {
+		viewItem(+page);
+	} else {
+		$("#cat").html("All");
+		loadItems();
+	}
+		});
+		window.onhashchange = function () {
+			var page = window.location.hash.substr(1);
+			//$(".close").attr("href","#" + page);
+			if(page == "elec") {
+				$("#cat").html("Electronics");
+			} else if (page == "house") {
+				$("#cat").html("Household");
+			} else if (page == "other") {
+				$("#cat").html("Other");
+			} else {
+				$("#cat").html("All");
+			}
+		}*/
+	</script> 
+	<script src="getitems.js"></script>
+</head>
+<body>
+	<div id = "bar">
+		<div id = "holder">
+			<a href="index.html" class="navlink">
+			<div class = "nav" id = "left">
+				Home
+			</div>
+			</a>
+			<a href="orders.html" class ="navlink">
+			<div class = "nav">
+				Order
+			</div>
+			<a>
+			<a href="user.html" class="navlink">
+			<div class = "nav" id = "right">
+				User
+			</div>
+			</a>
+			<span class="stretch"></span>
+		</div>
+	</div>
+	<div id = "top">
+		<h1>ThreeDee</h1>
+		<h3>An innovative way to order 3d prints</h2>
+	</div>
+	<div class = "main">
+		<h2 id = "cat">All items</h2>
+		<a id="simple-menu" class = "link" href="#sidr">View categories</a>
+	</div>
+</body>
+<div id="sidr">	
+		<ul>
+			<li><a id="close" style ="text-align: right;" href = "#sidr">&lt;Close</a></li>
+			<li><a href="#all" class = "choice">All</a></li>
+			<li><a href="#elec" class = "choice">Electronics</a></li>
+			<li><a href="#house" class = "choice">Household</a></li>
+			<li><a href="#other" class = "choice">Other</a></li>
+		</ul>
+	</div> 

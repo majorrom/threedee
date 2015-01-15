@@ -1,0 +1,88 @@
+{
+	"items" : [{
+			"name" : "Cute Octopus says Hello",
+			"description" : "A little octopus",
+			"basecost" : 30,
+			"pic" : "http://photos-b.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/914745_227573017452857_2055379062_n.jpg",
+			"category": "Other",
+			"colours" : [{
+					"colour" : "Blue",
+					"mod" : 0
+				}, {
+					"colour" : "Red",
+					"mod" : 0
+				}, {
+					"colour" : "Green",
+					"mod" : 0
+				}, {
+					"colour" : "Glow in the dark white",
+					"mod" : 10
+				}, {
+					"colour" : "Glow in the dark blue",
+					"mod" : 20
+				}
+			],
+			"custom" : [{
+					"name" : "Eyes",
+					"description" : "The octopus has little eyes that appear to follow you",
+					"values" : [{
+							"name" : "No",
+							"mod" : 0
+						}, {
+							"name" : "Yes",
+							"mod" : 5
+						}
+					]
+				}, {
+					"name" : "Size",
+					"description" : "Different sizes",
+					"values" : [{
+							"name" : "Small",
+							"mod" : -20
+						}, {
+							"name" : "Medium",
+							"mod" : 0
+						}, {
+							"name" : "Large",
+							"mod" : 20
+						}, {
+							"name" : "Huge",
+							"mod" : 40
+						}
+					]
+				}
+			]
+		},{
+			"name" : "Fake iPhone",
+			"description" : "You can't throw a real one at a wall!",
+			"basecost" : 50,
+			"pic" : "http://photos-f.ak.instagram.com/hphotos-ak-xpf1/t51.2885-15/10358410_235660363299013_2115389619_n.jpg",
+			"category": "Electronics",
+			"colours" : [{
+					"colour" : "Based on phone",
+					"mod" : 0
+				}
+			],
+			"custom" : [{
+					"name" : "Phone model",
+					"description" : "What type of phone?",
+					"values" : [ 
+						{
+							"name" : "iPhone 5(S)",
+							"mod" : 0
+						}, {
+							"name" : "iPhone 5C Green",
+							"mod" : 0
+						} , {
+							"name" : "iPhone 6",
+							"mod" : 10
+						} ,{
+							"name" : "iPhone 4S White Realistic",
+							"mod" : 20
+						}
+					]
+				}
+			]
+		}
+	]
+}
